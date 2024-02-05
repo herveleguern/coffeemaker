@@ -1,80 +1,28 @@
 <!DOCTYPE html>
 <!-- classes JS coffeeMaker Jonathan avec enrobage HTML-->
 <html>
+<script src="coffeeMaker.js"></script>
+
 <body>
     <p>Coffee:<span id="coffee"></span></p>
     <p>Milk:<span id="milk"></span></p>
     <p>Sugar:<span id="sugar"></span></p>
 
+
     <script type="text/JavaScript">
-        class CoffeeMaker {
-            #coffee = 1000;
-            #milk = 500;
-            #sugar = 200;
-
-            prepare(coffee) {
-                if (this.hasCoffee()) {
-                    this.#coffee = this.#coffee - coffee.getCoffeeQuantity();
-
-                    if (coffee instanceof MilkCoffee) {
-                        this.pourMilk(coffee);
-                    }
-                }
-            }
-
-            pourMilk(coffee) {
-                this.#milk = this.#milk - coffee.getMilkQuantity();
-            }
-
-            hasCoffee() {
-                return this.#coffee > 0;
-            }
-
-            getCoffee() {
-                return this.#coffee;
-            }
-        }
-
-        class Coffee {
-            #coffee;
-
-            constructor(coffeeQuantity) {
-                this.#coffee = coffeeQuantity;
-            }
-
-            getCoffeeQuantity() {
-                return this.#coffee;
-            }
-        }
-
-        class Espresso extends Coffee {
-            constructor() {
-                super(10);
-            }
-        }
-
-        class MilkCoffee extends Coffee {
-            #milk = 10;
-
-            constructor() {
-                super(20);
-            }
-
-            getMilkQuantity() {
-                return this.#milk;
-            }
-        }
-
-        const coffeeMaker=new coffeeMaker();
-        console.log(coffeeMaker.getCoffee());
+        const coffeeMaker=new CoffeeMaker();
         document.getElementById("coffee").innerHTML = coffeeMaker.getCoffee();
-        document.getElementById("milk").innerHTML = "todo";
-        document.getElementById("sugar").innerHTML = "todo";
+        document.getElementById("milk").innerHTML = coffeeMaker.getMilk();
+        document.getElementById("sugar").innerHTML = coffeeMaker.getSugar();
     </script>
 
-    <button type="submit">Expresso</button>
-    <button type="submit">Coffee</button>
-    <button type="submit">MilkCoffee</button>
+    <button id="btCoffee">Coffee</button>
+    <script>
+        let monBouton = document.querySelector('#btCoffee');
+        monBouton.addEventListener('click', coffeeMaker.prepare(new Coffee()));
+        console.log(coffeeMaker.getCoffee());
+    </script>
+
 </body>
 
 </html>
