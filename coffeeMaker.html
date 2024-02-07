@@ -19,8 +19,13 @@
     <button id="btCoffee">Coffee</button>
     <script>
         let monBouton = document.querySelector('#btCoffee');
-        monBouton.addEventListener('click', coffeeMaker.prepare(new Coffee()));
-        console.log(coffeeMaker.getCoffee());
+        monBouton.addEventListener('click', () => {
+            coffeeMaker.prepare(new Coffee(10));
+            document.getElementById("coffee").innerHTML = coffeeMaker.getCoffee();
+            document.getElementById("milk").innerHTML = coffeeMaker.getMilk();
+            document.getElementById("sugar").innerHTML = coffeeMaker.getSugar();
+            console.log(coffeeMaker.getCoffee());
+        });
     </script>
 
 </body>
